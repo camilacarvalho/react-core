@@ -2,7 +2,7 @@ import { Avatar, Box, Divider, Drawer, List, ListItemButton, ListItemIcon, ListI
 import Icon from '@mui/material/Icon';
 import React from 'react';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
-import { useSidebarContext } from '../contexts';
+import { useSidebarContext } from '../../contexts';
 
 interface IListItemLink {
     to: string;
