@@ -2,10 +2,12 @@ import axios from 'axios';
 import { resolve } from 'path';
 import { Environment } from '../environment';
 
+const accessToken = localStorage.getItem(Environment.LOCAL_STORAGE_KEY_ACCESS_TOKEN);
+
 const Api = axios.create({
     baseURL:'http://localhost:3333',
     headers: {
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem(Environment.LOCAL_STORAGE_KEY_ACCESS_TOKEN) || '')}`
+        Authorization: `Bearer ${accessToken?JSON.parse(accessToken):''}`
     }
 });
 

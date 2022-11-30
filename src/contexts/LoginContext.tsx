@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { LoginService } from '../api/login/AuthService';
+import { LoginService } from '../api/login/LoginService';
 import { Environment } from '../environment';
 import { LoginRequest } from '../models/login';
 

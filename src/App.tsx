@@ -1,16 +1,22 @@
 import { BrowserRouter } from 'react-router-dom';
+import Login from './components/login/Login';
 import Sidebar from './components/sidebar/Sidebar';
 import { AppSidebarProvider } from './contexts';
+import { LoginProvider } from './contexts/LoginContext';
 import AppRoutes from './routes';
 const App = () => {
     return (
-        <BrowserRouter>
-            <AppSidebarProvider>
-                <Sidebar>
-                    <AppRoutes />
-                </Sidebar>
-            </AppSidebarProvider>
-        </BrowserRouter>
+        <LoginProvider>
+            <Login>
+                <BrowserRouter>
+                    <AppSidebarProvider>
+                        <Sidebar>
+                            <AppRoutes />
+                        </Sidebar>
+                    </AppSidebarProvider>
+                </BrowserRouter>
+            </Login>
+        </LoginProvider>
     );
 };
 
