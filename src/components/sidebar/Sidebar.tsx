@@ -3,6 +3,7 @@ import Icon from '@mui/material/Icon';
 import React from 'react';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 import { useSidebarContext } from '../../contexts';
+import { useLoginContext } from '../../contexts/LoginContext';
 
 interface IListItemLink {
     to: string;
@@ -34,7 +35,7 @@ type SidebarTypes = {
 const Sidebar = ({ children }: SidebarTypes) => {
     const theme = useTheme();
     const smDown = useMediaQuery(theme.breakpoints.down('sm'));
-
+    const { logout } = useLoginContext();
     const {isSidebarOpen, toggleSidebarOpen, sidebarOptions } = useSidebarContext();
     return (<>
         <Drawer open={isSidebarOpen} variant={smDown ? 'temporary' : 'permanent'}>
@@ -49,6 +50,19 @@ const Sidebar = ({ children }: SidebarTypes) => {
                             <ListItemLink key={sidebarOption.path} icon={sidebarOption.icon} to={sidebarOption.path} onClick={smDown?toggleSidebarOpen:undefined} label={sidebarOption.label} ></ListItemLink>
                         ))}
                        
+                    </List>
+                </Box>
+                <Divider />
+                <Box>
+                    <List component='nav'>
+                        <ListItemButton onClick={logout}>
+                            <ListItemIcon>
+                                <Icon>logout</Icon>
+                            </ListItemIcon>
+                            <ListItemText>
+                                Sair
+                            </ListItemText>
+                        </ListItemButton>
                     </List>
                 </Box>
             </Box>

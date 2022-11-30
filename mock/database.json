@@ -2,7 +2,21 @@
     "users":[{
         "id":1,
         "name": "Camila Carvalho da Silva",
-        "username": "camila.silva"
+        "email": "camila.silva@ccc.ufcg.edu.br",
+        "isActive": true,
+        "roleId": 1
 
-    }]
+    }],
+    "role":[{
+        "id": 1,
+        "name":"Administrator"
+    }, {
+        "id": 2,
+        "name":"Common"
+    } ],
+    "login": {
+        "email":"camila.silva@ccc.ufcg.edu.br",
+        "password":"123456",
+        "accessToken": "aaaaaaaaaaa.bbbbbbbbbbbb.cccccccccccc"
+    }
 }
