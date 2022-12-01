@@ -16,10 +16,9 @@ const  LoginContext = createContext({} as ILoginContextData);
 export const LoginProvider = ({children}:{children: React.ReactNode}) => {
 
     const [accessToken, setAccessToken]= useState<string>();
-    /** Funções que são passadas em providers tem que usar useCallback, para memorizar o resultado da função sem necessitar executá-la com frequencia. */
+
     const handleLogin = useCallback( async (auth: LoginRequest) => {
         const result = await LoginService.login(auth);
-        /** É importante salvar no LocalStorage porque ao apertar f5 não perderá o token */
         localStorage.setItem(Environment.LOCAL_STORAGE_KEY_ACCESS_TOKEN, JSON.stringify(result.accessToken));
         setAccessToken(result.accessToken);
 
