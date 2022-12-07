@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useSidebarContext } from '../contexts';
-import { Home, User } from '../pages';
+import { Home, UserCreate, UserList } from '../pages';
 const AppRoutes = () => {
     const {setSidebarOptions} = useSidebarContext();
     useEffect(()=>{
@@ -23,7 +23,8 @@ const AppRoutes = () => {
     return(
         <Routes>
             <Route path='/home' element={<Home/>}></Route>
-            <Route path='/users' element={<User/>}></Route>
+            <Route path='/users' element={<UserList/>}></Route>
+            <Route path='/users/create' element={<UserCreate/>}></Route>
             <Route path='*' element={<Navigate to="/home"/>}></Route>
         </Routes>
     );
