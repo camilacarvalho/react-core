@@ -6,6 +6,7 @@ import AppRoutes from './routes';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Login } from './pages';
+import { ToastContainer } from 'react-toastify';
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
                 </Login>
             </LoginProvider>
             <ReactQueryDevtools initialIsOpen={false}/>
+            <ToastContainer />
         </QueryClientProvider>
     );
 };

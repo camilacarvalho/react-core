@@ -1,10 +1,12 @@
 import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { FormField, SelectField } from '../../../components';
 import { newUser } from '../../../models';
+import userApi from '../hooks/useUserApi';
 const UserCreate = () => {
-
+    
     const roles = [
         {
             'value': 1,
@@ -28,6 +30,9 @@ const UserCreate = () => {
 
     const handleSubmit = (user: newUser)=> {
         console.log(user);
+        toast.success('Success Notification !', {
+            position: toast.POSITION.TOP_RIGHT, autoClose: 3000, toastId: 'toast-user-create-success'
+        });
     };
 
     return (
@@ -40,7 +45,7 @@ const UserCreate = () => {
                     <Grid item xs={0} md={1} lg={2}>
                     </Grid>
                     <Grid item xs={12} md={10} lg={8}>
-                        <Formik validationSchema={userSchema} initialValues={initialValues}  onSubmit={(values)=> {handleSubmit(values);}}>
+                        <Formik validationSchema={userSchema} initialValues={initialValues}  onSubmit={handleSubmit}>
                             {({isValid})=> (
                                 <Form>
                                     <Card variant="outlined">
