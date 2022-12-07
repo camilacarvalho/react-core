@@ -1,4 +1,4 @@
-import { LoginData, LoginRequest } from '../../models/login';
+import { LoginData, LoginRequest } from '../../models';
 import Api from '../axios';
 
 const login = async(login: LoginRequest): Promise<LoginData> => {

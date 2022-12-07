@@ -2,9 +2,9 @@ import { Button, Card, CardActions, CardContent, Typography } from '@mui/materia
 import { Box } from '@mui/system';
 import { useLoginContext } from '../../contexts/LoginContext';
 import * as Yup from 'yup';
-import { LoginRequest } from '../../models/login';
+import { LoginRequest } from '../../models';
 import {Formik, Form} from 'formik';
-import FormField from '../../components/form/FormField';
+import { FormField } from '../../components';
 
 const loginSchema = Yup.object().shape({
     email: Yup.string().email().required(),
@@ -24,7 +24,7 @@ const Login = ({ children }: { children: React.ReactNode }) => {
     return (
         <Box width='100vw' height='100vh' display='flex' alignItems='center' justifyContent='center'>
             <Formik validationSchema={loginSchema} initialValues={{email:'', password:''}} onSubmit={(values)=> {handleSubmit(values);}}>
-                {(isValid)=> (
+                {({isValid})=> (
                     <Form>
                         <Card>
                             <CardContent>

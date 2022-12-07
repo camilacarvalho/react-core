@@ -1,10 +1,11 @@
 import { BrowserRouter } from 'react-router-dom';
-import { Login, Sidebar } from './components';
+import { Sidebar } from './components';
 import { AppSidebarProvider } from './contexts';
 import { LoginProvider } from './contexts/LoginContext';
 import AppRoutes from './routes';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { Login } from './pages';
 const queryClient = new QueryClient();
 
 const App = () => {

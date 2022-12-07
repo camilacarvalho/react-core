@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { LoginService } from '../api/login/LoginService';
 import { Environment } from '../environment';
-import { LoginRequest } from '../models/login';
+import { LoginRequest } from '../models';
 
 interface ILoginContextData {
     isAuthenticated: boolean;

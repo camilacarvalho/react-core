@@ -3,7 +3,8 @@ interface userData {
     name: string;
     email: string,
     isActive: boolean,
-    roleId: number
+    roleId: number,
+    avatar: string
 }
 
 type usersResponse = {
