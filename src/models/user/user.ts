@@ -1,5 +1,5 @@
 interface userData {
-    id: number;
+    id?: number;
     name: string;
     email: string,
     isActive: boolean,
@@ -12,8 +12,6 @@ type usersResponse = {
     totalCount: number;
 }
 
-type newUser = Omit<userData, 'id'>
-
 export type {
-    userData, usersResponse, newUser
+    userData, usersResponse
 };
