@@ -1,17 +1,16 @@
-import { usersResponse , userData, newUser} from '../../models';
+import { userData } from '../../models';
 import Api from '../axios';
 
-const getAll = async(page=1, limit=10, filter=''): Promise<userData[]> => {
-    const { data } = await Api.get<userData[]>(`/users?_page=${page}&_limit=${limit}&email_like=${filter}`);
+const getAll = async(): Promise<userData[]> => {
+    const { data } = await Api.get<userData[]>('/users');
     return data;
 };
 
 const getById = async(id:number): Promise<userData> => {
-    const {data} = await Api.get(`/users${id}`);
-    return data;
+    return await Api.get(`/users${id}`);
 };
-const create = async(user: newUser): Promise<userData> => {
-    const {data} = await Api.post('/users', user);
+const create = async(user: userData): Promise<userData> => {
+    const { data } = await Api.post('/users', user);   
     return data;
 };
 const updateById = async(id:number, user: userData): Promise<void> => {
