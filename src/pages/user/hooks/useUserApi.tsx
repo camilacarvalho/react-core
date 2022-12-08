@@ -1,5 +1,6 @@
 import { QueryClient, useQuery, useMutation } from 'react-query';
 import { UserService } from '../../../api/user/UserService';
+import { newUser } from '../../../models';
 
 
 
@@ -9,12 +10,13 @@ const userApi = () => {
     const getAll = () => {
         return useQuery('users', () => { return UserService.getAll();});
     };
+
     const create = () => {
-        return useMutation(UserService.create), {
+        return useMutation(UserService.create, {
             onSuccess: () => {
                 queryClient.invalidateQueries('users');
             }
-        };
+        });
     };
 
     return {
