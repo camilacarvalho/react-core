@@ -24,6 +24,7 @@
             "error",
             4
         ],
+        "@typescript-eslint/no-inferrable-types": "off",
         "react/react-in-jsx-scope": "off",
         "quotes": [
             "error",

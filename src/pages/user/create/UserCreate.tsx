@@ -1,12 +1,18 @@
-import { Box, Button, Card, CardActions, CardContent, CardHeader, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@mui/material';
 import { Form, Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 import { FormField, SelectField } from '../../../components';
 import { newUser } from '../../../models';
+import notification from '../../../utils/notification';
 import userApi from '../hooks/useUserApi';
+
 const UserCreate = () => {
-    
+    const { user: userAPI } = userApi();
+    const { mutate: createUser } = userAPI.create();
+
+    const navigate = useNavigate();
     const roles = [
         {
             'value': 1,
@@ -30,16 +36,22 @@ const UserCreate = () => {
 
     const handleSubmit = (user: newUser)=> {
         console.log(user);
-        toast.success('Success Notification !', {
-            position: toast.POSITION.TOP_RIGHT, autoClose: 3000, toastId: 'toast-user-create-success'
-        });
+        createUser(user, {
+            onSuccess: () => {
+                notification('success','Usuário inserido com sucesso !', 'toast-user-create-success');
+                navigate('/users');
+            },
+            onError: (error: any) => {
+                const errorMessage =
+                error?.errors[0] || 'Erro ao inserir usuário !';
+                notification('error', errorMessage, 'toast-user-create-error');
+            }
+        });    
     };
 
+    //adicionar breadcrumb
     return (
         <Box>
-            <Box>
-                voltar
-            </Box>
             <Box mt={10}>
                 <Grid container>
                     <Grid item xs={0} md={1} lg={2}>
@@ -49,11 +61,9 @@ const UserCreate = () => {
                             {({isValid})=> (
                                 <Form>
                                     <Card variant="outlined">
-                                        <CardHeader>
-                                            <Typography>Cadastro de Usuário</Typography> 
-                                        </CardHeader>
                                         <CardContent>
                                             <Box display='flex' flexDirection='column' gap={2} padding={2}>
+                                                <Typography variant="h5">Cadastro de Usuário</Typography> 
                                                 <FormField id="name-field" name="name" label="Nome" fullWidth required />
                                                 <FormField id="email-field" name="email" label="Email" type='email' fullWidth required />
                                                 <SelectField name='roleId' id='role-select' label='Função' options={roles} fullWidth required />
