@@ -5,10 +5,12 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Icon from '@mui/material/Icon';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
+import { useModalConfirmationContext } from '../../../contexts/ModalConfirmationContextProvider';
 
 const UserList = () => {
     const { user: userAPI } = userApi();
     const { data } = userAPI.getAll();
+    const { mutate: deleteUser } = userAPI.deleteById();
     const navigate = useNavigate();
     const location = useLocation();
     const theme = useTheme();
@@ -16,11 +18,13 @@ const UserList = () => {
     const mdDown = useMediaQuery(theme.breakpoints.down('md'));
 
     const handleEditUser=(id:number)=> {
-        console.log(id);
+        navigate(`${location.pathname}/${id}`);
     };
+    
+    const modal = useModalConfirmationContext();
 
-    const handleDeleteUser=(id:number)=> {
-        console.log(id);
+    const handleOpen = (id:number, name: string) => {
+        modal.showConfirmation('Confirmar', `Deseja remover o usuário ${name}?`, ()=> deleteUser(id));
     };
 
     const columns: GridColDef[] = [
@@ -35,7 +39,7 @@ const UserList = () => {
         { field: 'roleId', minWidth: 10, flex: 0.5 , headerName: 'Role', headerAlign: 'center', align: 'center'},
         {
             field: 'actions', flex: 0.5, minWidth: 10, headerName: 'Ações', headerAlign: 'center', align: 'center', sortable: false, disableColumnMenu: true, renderCell: (params) => {
-                const { id } = params.row;
+                const { id, name } = params.row;
                 return (<Box>
                     <IconButton color='info'
                         aria-label='edit'
@@ -45,7 +49,7 @@ const UserList = () => {
                     </IconButton>
                     <IconButton color='error'
                         aria-label='delete'
-                        onClick={()=>handleDeleteUser(id)}
+                        onClick={()=>handleOpen(id, name)}
                     >
                         <Icon>delete</Icon>
                     </IconButton>
@@ -55,6 +59,7 @@ const UserList = () => {
     ];
 
     return (
+        
         <BasePageLayout title='Usuários' barraDeFerramentas={<>Barra de Ferramentas</>}>
             <Box paddingX={smDown?theme.spacing(3):mdDown?theme.spacing(1):theme.spacing(10)}>
                 <Box display='flex' justifyContent='end' marginY={theme.spacing(3)}>
