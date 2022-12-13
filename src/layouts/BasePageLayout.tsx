@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import { useSidebarContext } from '../contexts';
 
 type BasePageLayoutProps = {
-    title: string;
+    title?: string;
     children: React.ReactNode;
     barraDeFerramentas: React.ReactNode
 }
@@ -14,12 +14,12 @@ const BasePageLayout = ({ title, children, barraDeFerramentas }: BasePageLayoutP
     const {toggleSidebarOpen} = useSidebarContext();
     return (
         <Box height='100%' display='flex' flexDirection='column' gap={1}>
-            <Box display='flex' alignItems='center' gap={1} padding={1} height={theme.spacing(smDown?6:mdDown?8:12)}>
+            {title && <Box display='flex' alignItems='center' gap={1} padding={1} height={theme.spacing(smDown?6:mdDown?8:12)}>
                 {smDown && (<IconButton onClick={toggleSidebarOpen}>
                     <Icon>menu</Icon>
                 </IconButton>)}
                 <Typography variant={smDown?'h5':mdDown?'h4':'h3'} component='label' overflow='hidden' whiteSpace='nowrap' text-overflow='ellipses'>{title}</Typography>
-            </Box>
+            </Box>}
             
             {barraDeFerramentas && (<Box>{barraDeFerramentas}</Box>)}
 

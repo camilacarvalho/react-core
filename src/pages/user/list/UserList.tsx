@@ -6,6 +6,7 @@ import Icon from '@mui/material/Icon';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { useModalConfirmationContext } from '../../../contexts/ModalConfirmationContextProvider';
+import { Breadcrumb } from '../../../components';
 
 const UserList = () => {
     const { user: userAPI } = userApi();
@@ -58,9 +59,11 @@ const UserList = () => {
         }
     ];
 
+    const breadcrumbList = [{title: 'Usuários', link:'/users'}];
+
     return (
         
-        <BasePageLayout title='Usuários' barraDeFerramentas={<>Barra de Ferramentas</>}>
+        <BasePageLayout barraDeFerramentas={<Breadcrumb  items={breadcrumbList}/>}>
             <Box paddingX={smDown?theme.spacing(3):mdDown?theme.spacing(1):theme.spacing(10)}>
                 <Box display='flex' justifyContent='end' marginY={theme.spacing(3)}>
                     <Button variant="contained" startIcon={<Icon>add</Icon>} onClick={() => navigate(`${location.pathname}/create`)}>Adicionar Usuário</Button>
