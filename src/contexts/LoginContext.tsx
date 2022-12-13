@@ -9,7 +9,6 @@ interface ILoginContextData {
     login: (auth: LoginRequest) => Promise<string | void>
 }
 
-
 const  LoginContext = createContext({} as ILoginContextData);
 
 

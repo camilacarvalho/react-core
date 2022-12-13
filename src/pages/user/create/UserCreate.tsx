@@ -1,4 +1,3 @@
-import { Box,  Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { userData } from '../../../models';
 import UserForm from '../form/UserForm';
@@ -22,19 +21,7 @@ const UserCreate = () => {
 
     //adicionar breadcrumb
     return (
-        <Box>
-            <Box mt={10}>
-                <Grid container>
-                    <Grid item xs={0} md={1} lg={2}>
-                    </Grid>
-                    <Grid item xs={12} md={10} lg={8}>
-                        <UserForm initialValues={initialValues} submit={handleSubmit}/>
-                    </Grid>
-                    <Grid item xs={0} md={1} lg={2}>
-                    </Grid>
-                </Grid>
-            </Box>
-        </Box>
+        <UserForm title='Cadastro de Usuário' initialValues={initialValues} submit={handleSubmit}/>
     );
 };
 
